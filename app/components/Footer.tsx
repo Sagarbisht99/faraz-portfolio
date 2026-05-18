@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   FaInstagram,
   FaTwitter,
@@ -9,14 +10,14 @@ import { HiArrowUpRight } from "react-icons/hi2";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const socialLinks = [
-    { icon: <FaInstagram size={18} />, href: "#", label: "Instagram" },
-    { icon: <FaTwitter size={18} />, href: "#", label: "Twitter" },
-    { icon: <FaLinkedinIn size={18} />, href: "#", label: "LinkedIn" },
-    { icon: <FaGithub size={18} />, href: "#", label: "GitHub" },
-  ];
 
-  const quickLinks = ["Home", "About", "Services", "Projects", "Contact"];
+  const quickLinks = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/#about" },
+    { label: "Services", href: "/#services" },
+    { label: "Projects", href: "/#work" },
+    { label: "Contact", href: "/#contact-us" },
+  ];
 
   return (
     <footer className="border-t border-white/5 bg-[#12141D] pt-16 pb-8 sm:pt-20 sm:pb-10 lg:pt-24 lg:pb-12">
@@ -30,18 +31,7 @@ const Footer = () => {
               Crafting digital experiences that blend aesthetic excellence with
               functional precision.
             </p>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[#94A3B8] transition-all duration-500 hover:-translate-y-1 hover:border-[#4A90E2] hover:bg-[#4A90E2] hover:text-[#F8FAFC] sm:h-11 sm:w-11"
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
+      
           </div>
 
           <div className="flex flex-col justify-center md:items-end">
@@ -50,7 +40,7 @@ const Footer = () => {
                 Have a project?
               </span>
               <a
-                href="mailto:hello@faraazdesign.com"
+                href="mailto:alfaraaz805230@gmail.com"
                 className="group block cursor-pointer"
               >
                 <span className="heading-display flex items-center gap-3 text-3xl tracking-tight text-[#F8FAFC] transition-all duration-300 group-hover:text-[#4A90E2] sm:gap-4 sm:text-4xl md:justify-end lg:text-5xl xl:text-6xl">
@@ -62,7 +52,7 @@ const Footer = () => {
                 </span>
               </a>
               <p className="font-medium text-[#94A3B8]">
-                hello@faraazdesign.com
+                alfaraaz805230@gmail.com
               </p>
             </div>
           </div>
@@ -70,14 +60,14 @@ const Footer = () => {
 
         <div className="flex flex-wrap gap-x-8 gap-y-4 border-y border-white/5 py-8 sm:gap-x-12 sm:py-10">
           {quickLinks.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
+            <Link
+              key={link.label}
+              href={link.href}
               className="group relative text-[10px] font-bold uppercase tracking-[0.25em] text-[#94A3B8] transition-colors hover:text-[#F8FAFC] sm:text-xs"
             >
-              {link}
+              {link.label}
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#4A90E2] transition-all duration-300 group-hover:w-full" />
-            </a>
+            </Link>
           ))}
         </div>
 

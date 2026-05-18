@@ -5,6 +5,7 @@ import ServicesPage from "./components/Service";
 import WorkSection from "./components/Work";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Contact from "./components/Contact";
 
 const page = () => {
   return (
@@ -16,6 +17,7 @@ const page = () => {
         <AboutSection />
         <ServicesPage />
         <WorkSection />
+        <Contact />
       </main>
       <Footer />
     </div>

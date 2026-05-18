@@ -6,8 +6,8 @@ const contactDetails = [
   {
     label: "Phone",
     title: "Mobile",
-    value: "+91 98765 43210",
-    href: "tel:+919876543210",
+    value: "+91 95995 34752",
+    href: "tel:+919599534752",
     description: "Call or WhatsApp anytime",
     icon: Phone,
     accent: "text-[#4A90E2]",
@@ -16,8 +16,8 @@ const contactDetails = [
   {
     label: "Email",
     title: "Gmail",
-    value: "hello@faraazdesign.com",
-    href: "mailto:hello@faraazdesign.com",
+    value: "alfaraaz805230@gmail.com",
+    href: "mailto:alfaraaz805230@gmail.com",
     description: "For projects & collaborations",
     icon: Mail,
     accent: "text-[#00D4FF]",
@@ -26,8 +26,8 @@ const contactDetails = [
   {
     label: "Instagram",
     title: "Instagram",
-    value: "@faraaz.design",
-    href: "https://instagram.com/faraaz.design",
+    value: "@al_faraaz_0786",
+    href: "https://instagram.com/al_faraaz_0786",
     description: "DM me for quick replies",
     icon: FaInstagram,
     accent: "text-[#E1306C]",
@@ -36,35 +36,75 @@ const contactDetails = [
   },
 ];
 
+function MotionGlow({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`pointer-events-none absolute top-0 left-0 h-96 w-96 rounded-full bg-[#4A90E2]/5 blur-[120px] ${className}`}
+      aria-hidden
+    />
+  );
+}
+
+function ContactScroller({ reverse = false }: { reverse?: boolean }) {
+  const doubled = [...contactDetails, ...contactDetails];
+
+  return (
+    <div className="marquee-row">
+      <div
+        className={`marquee-track flex w-max items-center gap-4 sm:gap-5 ${
+          reverse ? "marquee-track-reverse" : ""
+        }`}
+      >
+        {doubled.map((item, index) => {
+          const Icon = item.icon;
+          const isReactIcon = item.label === "Instagram";
+
+          return (
+            <div
+              key={`${item.label}-${index}`}
+              className="flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-[#1E212B]/80 px-5 py-3 backdrop-blur-sm sm:px-6 sm:py-3.5"
+            >
+              <span
+                className={`flex h-8 w-8 items-center justify-center rounded-full ${item.bg} ${item.accent}`}
+              >
+                {isReactIcon ? (
+                  <Icon size={16} />
+                ) : (
+                  <Icon className="h-4 w-4" strokeWidth={1.75} />
+                )}
+              </span>
+              <span className="label-caps text-[10px] text-[#94A3B8] sm:text-xs">
+                {item.label}
+              </span>
+              <span className="heading-display whitespace-nowrap text-sm text-[#F8FAFC] sm:text-base">
+                {item.value}
+              </span>
+              <span className="text-xs text-[#00D4FF]/60">✦</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 const Contact = () => {
   return (
     <section
-      id="contact"
+      id="contact-us"
       className="section-padding relative overflow-hidden border-t border-white/5 bg-[#12141D]"
     >
-      <motionGlow />
-
-      <motionGlow className="right-0 left-auto bg-[#00D4FF]/5" />
-
-      <motionGlow className="bottom-0 top-auto left-1/2 -translate-x-1/2 bg-[#4A90E2]/5" />
+      <MotionGlow />
+      <MotionGlow className="right-0 left-auto bg-[#00D4FF]/5" />
+      <MotionGlow className="bottom-0 top-auto left-1/2 -translate-x-1/2 bg-[#4A90E2]/5" />
 
       <div className="container-main relative z-10">
-        <motionGlow />
-
         <div className="mb-12 flex flex-col items-start justify-between gap-6 sm:mb-16 md:mb-20 md:flex-row md:items-end">
-          <motionGlow />
-
           <div className="max-w-xl space-y-3 sm:space-y-4">
-            <motionGlow />
-
-            <motionGlow />
-
             <div className="flex items-center gap-3">
-              <motionGlow />
-
               <div className="h-px w-8 bg-[#00D4FF]" />
               <span className="label-caps text-[#00D4FF]">Get In Touch</span>
-            </motionGlow>
+            </div>
 
             <h2 className="heading-display text-4xl text-[#F8FAFC] sm:text-5xl lg:text-6xl">
               Contact <span className="text-[#4A90E2]">Us.</span>
@@ -76,12 +116,21 @@ const Contact = () => {
           </div>
 
           <a
-            href="mailto:hello@faraazdesign.com"
+            href="mailto:alfaraaz805230@gmail.com"
             className="group hidden items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#4A90E2] transition-colors hover:text-[#00D4FF] md:flex"
           >
             Send a message
             <HiArrowUpRight className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
+        </div>
+
+        <div className="relative -mx-5 mb-10 sm:-mx-8 sm:mb-12 lg:-mx-12 xl:-mx-16">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-[#12141D] to-transparent sm:w-20" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-[#12141D] to-transparent sm:w-20" />
+          <ContactScroller />
+          <div className="mt-4">
+            <ContactScroller reverse />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
@@ -114,7 +163,7 @@ const Contact = () => {
                       size={20}
                       className="text-[#94A3B8] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#4A90E2]"
                     />
-                  </motionGlow>
+                  </div>
 
                   <span className="label-caps mb-2 block text-[10px] sm:text-xs">
                     {item.label}
@@ -134,7 +183,7 @@ const Contact = () => {
 
         <div className="mt-10 flex justify-center sm:mt-12 md:hidden">
           <a
-            href="mailto:hello@faraazdesign.com"
+            href="mailto:alfaraaz805230@gmail.com"
             className="flex w-full items-center justify-center gap-2 rounded-sm bg-[#4A90E2] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#F8FAFC] transition-colors hover:bg-[#00D4FF] sm:text-sm"
           >
             Send a message ↗
@@ -144,11 +193,5 @@ const Contact = () => {
     </section>
   );
 };
-
-function motionGlow({ className = "" }: { className?: string }) {
-  return (
-    <motionGlow />
-  );
-}
 
 export default Contact;
