@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { HiArrowUpRight } from "react-icons/hi2";
+import { useState, useEffect, useCallback } from "react";
+import { HiArrowUpRight, HiXMark, HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 type ProjectCategory =
   | "Logo Design"
@@ -86,7 +86,6 @@ const logoProjects: Project[] = [
   { title: "Logo Design 06", category: "Logo Design", thumbnail: "/logo/logo-6.png", year: "2026" },
   { title: "Logo Design 07", category: "Logo Design", thumbnail: "/logo/logo-7.png", year: "2026" },
   { title: "Logo Design 08", category: "Logo Design", thumbnail: "/logo/logo-8.png", year: "2026" },
-  { title: "Logo Design 09", category: "Logo Design", thumbnail: "/logo/logo-9.png", year: "2026" },
 ];
 
 const thumbnailProjects: Project[] = [
@@ -122,7 +121,15 @@ const typographyProjects: Project[] = Array.from({ length: 5 }, (_, i) => ({
   year: "2026",
 }));
 
-// FIXED: Added "Typography" here so it renders in the filter list
+// Flatten array to create a master list for filtering references
+const allProjects = [
+  ...logoProjects,
+  ...thumbnailProjects,
+  ...abroadPostProjects,
+  ...socialMediaProjects,
+  ...typographyProjects,
+];
+
 const categories = [
   "All",
   "Logo Design",
@@ -154,12 +161,19 @@ function SectionLabel({
   );
 }
 
-function WorkCard({ project }: { project: Project }) {
+function WorkCard({
+  project,
+  onOpenPreview,
+}: {
+  project: Project;
+  onOpenPreview: (project: Project) => void;
+}) {
   const theme = categoryTheme[project.category];
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-sm border border-white/5 bg-[#1E212B] transition-all duration-300 ${theme.hoverBorder}`}
+      onClick={() => onOpenPreview(project)}
+      className={`group relative overflow-hidden rounded-sm border border-white/5 bg-[#1E212B] transition-all duration-300 cursor-pointer ${theme.hoverBorder}`}
     >
       <div
         className={`absolute -top-10 -right-10 h-28 w-28 rounded-full blur-[40px] transition-all ${theme.glow}`}
@@ -174,7 +188,7 @@ function WorkCard({ project }: { project: Project }) {
             alt={project.title}
             fill
             className="object-contain p-2 transition-transform duration-500 group-hover:scale-105 sm:p-3"
-            sizes="176px"
+            sizes="(max-width: 640px) 160px, 176px"
           />
         </div>
 
@@ -210,6 +224,7 @@ type WorkSectionBlockProps = {
   projects: Project[];
   showHeading: boolean;
   className?: string;
+  onOpenPreview: (project: Project) => void;
 };
 
 function WorkSectionBlock({
@@ -217,6 +232,7 @@ function WorkSectionBlock({
   projects,
   showHeading,
   className = "",
+  onOpenPreview,
 }: WorkSectionBlockProps) {
   const theme = categoryTheme[projects[0]?.category ?? "Logo Design"];
 
@@ -231,7 +247,7 @@ function WorkSectionBlock({
       )}
       <div className={GRID_CLASS}>
         {projects.map((project) => (
-          <WorkCard key={project.title} project={project} />
+          <WorkCard key={project.title} project={project} onOpenPreview={onOpenPreview} />
         ))}
       </div>
     </div>
@@ -241,9 +257,45 @@ function WorkSectionBlock({
 const WorkSection = () => {
   const [activeFilter, setActiveFilter] =
     useState<(typeof categories)[number]>("All");
+  
+  const [previewProject, setPreviewProject] = useState<Project | null>(null);
 
   const isAll = activeFilter === "All";
   const sectionGap = "mb-14 sm:mb-16 md:mb-20";
+
+  // Compute active item lists relative to currently selected filter
+  const filteredProjects = allProjects.filter(
+    (p) => isAll || p.category === activeFilter
+  );
+
+  // Next and Previous navigation handlers
+  const handleNext = useCallback(() => {
+    if (!previewProject) return;
+    const currentIndex = filteredProjects.findIndex((p) => p.title === previewProject.title);
+    const nextIndex = (currentIndex + 1) % filteredProjects.length;
+    setPreviewProject(filteredProjects[nextIndex]);
+  }, [previewProject, filteredProjects]);
+
+  const handlePrev = useCallback(() => {
+    if (!previewProject) return;
+    const currentIndex = filteredProjects.findIndex((p) => p.title === previewProject.title);
+    const prevIndex = (currentIndex - 1 + filteredProjects.length) % filteredProjects.length;
+    setPreviewProject(filteredProjects[prevIndex]);
+  }, [previewProject, filteredProjects]);
+
+  // Keyboard accessibility listeners (Left/Right arrow keys & Escape)
+  useEffect(() => {
+    if (!previewProject) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "Escape") setPreviewProject(null);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [previewProject, handleNext, handlePrev]);
 
   return (
     <section
@@ -276,7 +328,10 @@ const WorkSection = () => {
             <button
               key={cat}
               type="button"
-              onClick={() => setActiveFilter(cat)}
+              onClick={() => {
+                setActiveFilter(cat);
+                setPreviewProject(null); // Clear preview when switching tabs to reset baseline sequence
+              }}
               className={`rounded-full border px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all sm:px-5 sm:text-xs ${
                 activeFilter === cat
                   ? "border-[#4A90E2] bg-[#4A90E2] text-white shadow-[0_0_20px_rgba(74,144,226,0.25)]"
@@ -294,6 +349,7 @@ const WorkSection = () => {
             projects={logoProjects}
             showHeading={isAll}
             className={isAll ? sectionGap : ""}
+            onOpenPreview={setPreviewProject}
           />
         )}
 
@@ -303,6 +359,7 @@ const WorkSection = () => {
             projects={thumbnailProjects}
             showHeading={isAll}
             className={isAll ? sectionGap : ""}
+            onOpenPreview={setPreviewProject}
           />
         )}
 
@@ -312,16 +369,17 @@ const WorkSection = () => {
             projects={abroadPostProjects}
             showHeading={isAll}
             className={isAll ? sectionGap : ""}
+            onOpenPreview={setPreviewProject}
           />
         )}
 
-        {/* FIXED: Added className={isAll ? sectionGap : ""} here so Typography doesn't overlap it when viewing 'All' */}
         {(isAll || activeFilter === "Social Media") && (
           <WorkSectionBlock
             label="Social Media"
             projects={socialMediaProjects}
             showHeading={isAll}
             className={isAll ? sectionGap : ""}
+            onOpenPreview={setPreviewProject}
           />
         )}
 
@@ -331,9 +389,80 @@ const WorkSection = () => {
             projects={typographyProjects}
             showHeading={isAll}
             className=""
+            onOpenPreview={setPreviewProject}
           />
         )}
       </div>
+
+      {/* --- Image Popup Modal with Controls --- */}
+      {previewProject && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#090A0F]/85 p-4 backdrop-blur-md transition-opacity duration-300"
+          onClick={() => setPreviewProject(null)}
+        >
+          {/* Modal Container */}
+          <div 
+            className="relative w-full max-w-4xl overflow-hidden rounded-md border border-white/10 bg-[#161922] p-2 shadow-2xl sm:p-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setPreviewProject(null)}
+              className="absolute top-4 right-4 z-20 rounded-full bg-[#12141D]/80 p-2 text-[#94A3B8] border border-white/5 hover:text-[#F8FAFC] hover:bg-[#1E212B] transition-colors"
+              aria-label="Close Preview"
+            >
+              <HiXMark size={22} />
+            </button>
+
+            {/* Media Area & Navigation Triggers */}
+            <div className="relative flex min-h-[280px] sm:min-h-[450px] max-h-[70vh] w-full items-center justify-between bg-[#12141D]/50 rounded-sm overflow-hidden group/modal">
+              
+              {/* Prev Button */}
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="absolute left-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/5 bg-[#12141D]/70 text-[#94A3B8] opacity-100 sm:opacity-0 group-hover/modal:opacity-100 hover:text-[#F8FAFC] hover:bg-[#1E212B] transition-all"
+                aria-label="Previous Project"
+              >
+                <HiChevronLeft size={24} />
+              </button>
+
+              {/* Main Active Image Viewport */}
+              <div className="flex h-full w-full items-center justify-center p-4">
+                <img
+                  src={previewProject.thumbnail}
+                  alt={previewProject.title}
+                  className="max-h-[65vh] w-auto max-w-full object-contain rounded-sm select-none"
+                />
+              </div>
+
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={handleNext}
+                className="absolute right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/5 bg-[#12141D]/70 text-[#94A3B8] opacity-100 sm:opacity-0 group-hover/modal:opacity-100 hover:text-[#F8FAFC] hover:bg-[#1E212B] transition-all"
+                aria-label="Next Project"
+              >
+                <HiChevronRight size={24} />
+              </button>
+            </div>
+
+            {/* Modal Metadata Footer */}
+            <div className="flex items-center justify-between px-3 py-3 sm:px-4">
+              <div>
+                <h4 className="text-base font-bold text-[#F8FAFC]">{previewProject.title}</h4>
+                <p className="text-xs font-medium uppercase tracking-wider text-[#94A3B8] mt-0.5">
+                  {previewProject.category}
+                </p>
+              </div>
+              <span className="text-xs font-mono bg-white/5 border border-white/10 px-2.5 py-1 text-[#94A3B8] rounded-sm">
+                {previewProject.year}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

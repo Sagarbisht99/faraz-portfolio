@@ -22,16 +22,15 @@ const AboutSection = () => {
             </p>
           </div>
 
-          <div className="relative mx-auto rounded-xl shadow-lg aspect-square w-full max-w-[280px] sm:max-w-[320px] md:col-span-4 md:ml-auto md:max-w-[350px]">
-            <div className="group absolute inset-0 rounded-xl overflow-hidden rounded-sm bg-[#4A90E2]">
+          <div className="relative mx-auto aspect-square w-full max-w-[280px] rounded-xl shadow-lg sm:max-w-[320px] md:col-span-4 md:ml-auto md:max-w-[350px]">
+            <div className="group absolute inset-0 overflow-hidden rounded-xl">
               <Image
                 src="/image-2.png"
                 alt="About Me"
                 fill
-                className="scale-110 object-cover mix-blend-luminosity transition-all duration-500 group-hover:mix-blend-normal"
+                className="scale-110 object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
                 sizes="(max-width: 768px) 280px, 350px"
               />
-              <div className="pointer-events-none absolute inset-0 bg-red-600/20 mix-blend-multiply" />
             </div>
           </div>
         </div>
@@ -42,7 +41,11 @@ const AboutSection = () => {
               key={stat.label}
               className={`flex flex-col items-center px-4 py-6 sm:items-start sm:p-8 ${
                 index !== 2 ? "sm:border-r sm:border-white/5" : ""
-              } ${index !== stats.length - 1 ? "border-b border-white/5 sm:border-b-0" : ""}`}
+              } ${
+                index !== stats.length - 1
+                  ? "border-b border-white/5 sm:border-b-0"
+                  : ""
+              }`}
             >
               <span className="mb-3 text-xs font-medium uppercase tracking-widest text-[#94A3B8] sm:mb-4 sm:text-sm">
                 {stat.label}
