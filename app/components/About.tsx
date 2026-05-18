@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const AboutSection = () => {
   const stats = [
-    { label: "Project Completed", value: "90+" },
+    { label: "Project Completed", value: "300+" },
     { label: "Years Of Experience", value: "02+" },
     { label: "Client Satisfaction", value: "97%" },
   ];
@@ -39,13 +39,11 @@ const AboutSection = () => {
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className={`flex flex-col items-center px-4 py-6 sm:items-start sm:p-8 ${
-                index !== 2 ? "sm:border-r sm:border-white/5" : ""
-              } ${
-                index !== stats.length - 1
+              className={`flex flex-col items-center px-4 py-6 sm:items-start sm:p-8 ${index !== 2 ? "sm:border-r sm:border-white/5" : ""
+                } ${index !== stats.length - 1
                   ? "border-b border-white/5 sm:border-b-0"
                   : ""
-              }`}
+                }`}
             >
               <span className="mb-3 text-xs font-medium uppercase tracking-widest text-[#94A3B8] sm:mb-4 sm:text-sm">
                 {stat.label}
