@@ -34,7 +34,7 @@ const ServicesPage = () => {
       tags: ["Vector", "Characters", "Icons"],
     },
     {
-      title: "Presentation Design",
+      title: "Logo Design",
       desc: "Turning dry data and complex pitches into high-impact visual stories that win clients and investors.",
       icon: <Megaphone className="h-7 w-7 sm:h-8 sm:w-8" />,
       tags: ["Pitch Decks", "PowerPoint", "Keynote"],

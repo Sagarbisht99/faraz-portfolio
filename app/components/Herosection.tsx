@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Herosection = () => {
   return (
@@ -35,10 +36,11 @@ const Herosection = () => {
             storytelling. I turn complex ideas into production-ready visual
             systems.
           </p>
-
-          <button className="w-fit rounded-sm bg-[#4A90E2] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-[#F8FAFC] transition-transform hover:scale-105 sm:px-10 sm:py-4 sm:text-sm">
+    <Link href="/#contact-us" className="block w-fit">
+          <button className="rounded-sm bg-[#4A90E2] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-[#F8FAFC] transition-transform hover:scale-105 sm:px-10 sm:py-4 sm:text-sm">
             Let&apos;s Talk ↗
           </button>
+          </Link>
         </div>
 
         {/* Right: Image */}

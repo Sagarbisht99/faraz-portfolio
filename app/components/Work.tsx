@@ -8,7 +8,8 @@ type ProjectCategory =
   | "Logo Design"
   | "Thumbnails"
   | "Abroad Posts"
-  | "Social Media";
+  | "Social Media"
+  | "Typography";
 
 type Project = {
   title: string;
@@ -65,6 +66,15 @@ const categoryTheme: Record<
     sectionAccent: "bg-[#E1306C]",
     sectionText: "text-[#E1306C]",
   },
+  Typography: {
+    hoverBorder: "hover:border-[#00D4FF]/30",
+    hoverTitle: "group-hover:text-[#00D4FF]",
+    glow: "bg-[#00D4FF]/5 group-hover:bg-[#00D4FF]/15",
+    badge: "text-[#00D4FF]",
+    badgeLabel: "Typography",
+    sectionAccent: "bg-[#00D4FF]",
+    sectionText: "text-[#00D4FF]",
+  },
 };
 
 const logoProjects: Project[] = [
@@ -105,12 +115,21 @@ const socialMediaProjects: Project[] = Array.from({ length: 11 }, (_, i) => ({
   year: "2026",
 }));
 
+const typographyProjects: Project[] = Array.from({ length: 5 }, (_, i) => ({
+  title: `Typography ${String(i + 1).padStart(2, "0")}`,
+  category: "Typography" as const,
+  thumbnail: `/typography/typography-${i + 1}.jpg`,
+  year: "2026",
+}));
+
+// FIXED: Added "Typography" here so it renders in the filter list
 const categories = [
   "All",
   "Logo Design",
   "Thumbnails",
   "Abroad Posts",
   "Social Media",
+  "Typography",
 ] as const;
 
 const MEDIA_HEIGHT = "h-[220px] sm:h-[240px]";
@@ -296,11 +315,22 @@ const WorkSection = () => {
           />
         )}
 
+        {/* FIXED: Added className={isAll ? sectionGap : ""} here so Typography doesn't overlap it when viewing 'All' */}
         {(isAll || activeFilter === "Social Media") && (
           <WorkSectionBlock
             label="Social Media"
             projects={socialMediaProjects}
             showHeading={isAll}
+            className={isAll ? sectionGap : ""}
+          />
+        )}
+
+        {(isAll || activeFilter === "Typography") && (
+          <WorkSectionBlock
+            label="Typography"
+            projects={typographyProjects}
+            showHeading={isAll}
+            className=""
           />
         )}
       </div>

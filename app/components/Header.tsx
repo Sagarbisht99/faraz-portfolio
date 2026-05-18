@@ -39,7 +39,7 @@ export default function Header() {
 
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
-            href="/contact-us"
+            href="/#contact-us"
             className="group hidden items-center gap-2 rounded-sm bg-[#4A90E2] px-5 py-2.5 text-sm font-semibold text-[#F8FAFC] transition-all hover:bg-[#00D4FF] sm:flex"
           >
             Contact Now{" "}
@@ -74,7 +74,7 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href="/contact-us"
+              href="/#contact-us"
               onClick={() => setMenuOpen(false)}
               className="mt-3 flex w-full items-center justify-center gap-2 rounded-sm bg-[#4A90E2] px-5 py-3 text-sm font-semibold text-[#F8FAFC]"
             >

@@ -15,12 +15,10 @@ import {
 const skills = [
   { label: "UI/UX Design", icon: Layout },
   { label: "Visual Design", icon: Palette },
-  { label: "Motion Graphics", icon: MonitorPlay },
   { label: "Identity Design", icon: Layers },
   { label: "Illustration", icon: PenTool },
   { label: "Presentation Design", icon: Sparkles },
   { label: "Brand Strategy", icon: Wand2 },
-  { label: "Figma", icon: Shapes },
   { label: "Photoshop", icon: ImageIcon },
   { label: "Illustrator", icon: Brush },
   { label: "Typography", icon: Type },
