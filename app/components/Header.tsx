@@ -22,7 +22,7 @@ export default function Header() {
           href="/"
           className="heading-display text-xl sm:text-2xl text-[#F8FAFC]"
         >
-          Faraaz<span className="text-[#4A90E2]">.</span>
+          Mohammad Alfaraaz<span className="text-[#4A90E2]">.</span>
         </Link>
 
         <div className="hidden items-center gap-8 lg:gap-10 md:flex">

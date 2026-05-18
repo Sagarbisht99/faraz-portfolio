@@ -25,7 +25,7 @@ const Footer = () => {
         <div className="mb-12 grid grid-cols-1 gap-10 sm:mb-16 sm:gap-12 md:grid-cols-2 md:gap-16 lg:mb-20">
           <div className="space-y-6 sm:space-y-8">
             <div className="heading-display text-3xl text-[#F8FAFC] sm:text-4xl">
-              Faraaz<span className="text-[#4A90E2]">.</span>
+              Alfaraaz<span className="text-[#4A90E2]">.</span>
             </div>
             <p className="max-w-sm text-base leading-relaxed text-[#94A3B8] sm:text-lg">
               Crafting digital experiences that blend aesthetic excellence with

@@ -48,7 +48,7 @@ const Herosection = () => {
           <div className="absolute inset-0 z-10 overflow-hidden rounded-xl lg:inset-0">
             <Image
               src="/image.png"
-              alt="Moha Faraaz"
+              alt="Mohammad Alfaraaz"
               fill
               className="object-contain object-bottom lg:scale-110"
               priority

@@ -15,7 +15,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Faraaz — Graphic Designer",
+  title: "Mohammad Alfaraaz — Graphic Designer",
   description: "Graphic designer portfolio — visual identity, UI/UX, and motion design.",
   icons : {
     icon : "/logo.png",
