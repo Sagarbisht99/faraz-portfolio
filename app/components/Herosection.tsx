@@ -42,8 +42,8 @@ const Herosection = () => {
         </div>
 
         {/* Right: Image */}
-        <div className="relative order-1 mx-auto aspect-[4/5] w-full max-w-sm sm:max-w-md lg:order-2 lg:mx-0 lg:aspect-auto lg:h-full lg:max-w-none lg:min-h-[480px]">
-          <div className="absolute inset-0 z-10 overflow-hidden lg:inset-0">
+        <div className="relative order-1 mx-auto aspect-[4/5] w-full rounded-xl shadow-lg max-w-sm sm:max-w-md lg:order-2 lg:mx-0 lg:aspect-auto lg:h-full lg:max-w-none lg:min-h-[480px]">
+          <div className="absolute inset-0 z-10 overflow-hidden rounded-xl lg:inset-0">
             <Image
               src="/image.png"
               alt="Moha Faraaz"

@@ -17,6 +17,9 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Faraaz — Graphic Designer",
   description: "Graphic designer portfolio — visual identity, UI/UX, and motion design.",
+  icons : {
+    icon : "/logo.png",
+  }
 };
 
 export default function RootLayout({

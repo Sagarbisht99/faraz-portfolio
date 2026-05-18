@@ -100,14 +100,7 @@ const ServicesPage = () => {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 rounded-sm bg-[#4A90E2] p-8 sm:mt-16 sm:gap-8 sm:p-10 md:mt-20 md:flex-row md:p-12">
-          <h4 className="heading-display text-center text-2xl tracking-tight text-white sm:text-3xl md:text-left">
-            Have a specific project <br className="hidden sm:block" /> in mind?
-          </h4>
-          <button className="w-full rounded-sm bg-[#12141D] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#F8FAFC] shadow-2xl transition-transform hover:-translate-y-1 sm:w-auto sm:px-10 sm:py-5 sm:text-sm">
-            Get a Free Quote ↗
-          </button>
-        </div>
+        
       </div>
     </section>
   );

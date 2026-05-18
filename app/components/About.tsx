@@ -3,7 +3,7 @@ import Image from "next/image";
 const AboutSection = () => {
   const stats = [
     { label: "Project Completed", value: "90+" },
-    { label: "Years Of Experience", value: "08+" },
+    { label: "Years Of Experience", value: "02+" },
     { label: "Client Satisfaction", value: "97%" },
   ];
 
@@ -22,8 +22,8 @@ const AboutSection = () => {
             </p>
           </div>
 
-          <div className="relative mx-auto aspect-square w-full max-w-[280px] sm:max-w-[320px] md:col-span-4 md:ml-auto md:max-w-[350px]">
-            <div className="group absolute inset-0 overflow-hidden rounded-sm bg-[#4A90E2]">
+          <div className="relative mx-auto rounded-xl shadow-lg aspect-square w-full max-w-[280px] sm:max-w-[320px] md:col-span-4 md:ml-auto md:max-w-[350px]">
+            <div className="group absolute inset-0 rounded-xl overflow-hidden rounded-sm bg-[#4A90E2]">
               <Image
                 src="/image-2.png"
                 alt="About Me"
