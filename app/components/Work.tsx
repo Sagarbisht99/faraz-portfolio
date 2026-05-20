@@ -93,14 +93,25 @@ const logoProjects: Project[] = [
   { title: "Logo Design 02", category: "Logo Design", thumbnail: "/logo/logo-2.png", year: "2026" },
   { title: "Logo Design 03", category: "Logo Design", thumbnail: "/logo/logo-3.png", year: "2026" },
   { title: "Logo Design 04", category: "Logo Design", thumbnail: "/logo/logo-4.png", year: "2026" },
+  { title: "Logo Design 05", category: "Logo Design", thumbnail: "/logo/logo-5.png", year: "2026" },
+  { title: "Logo Design 06", category: "Logo Design", thumbnail: "/logo/logo-6.png", year: "2026" },
+  { title: "Logo Design 07", category: "Logo Design", thumbnail: "/logo/logo-7.png", year: "2026" },
+  { title: "Logo Design 08", category: "Logo Design", thumbnail: "/logo/logo-8.png", year: "2026" },
 ];
 
 const thumbnailProjects: Project[] = [
   { title: "Thumbnail 01", category: "Thumbnails", thumbnail: "/thumbnail/thumbnail-1.png", year: "2026" },
   { title: "Thumbnail 02", category: "Thumbnails", thumbnail: "/thumbnail/thumbnail-2.jpg", year: "2026" },
+  { title: "Thumbnail 03", category: "Thumbnails", thumbnail: "/thumbnail/thumbnail-3.jpg", year: "2026" },
+  { title: "Thumbnail 04", category: "Thumbnails", thumbnail: "/thumbnail/thumbnail-4.jpg", year: "2026" },
+  { title: "Thumbnail 05", category: "Thumbnails", thumbnail: "/thumbnail/thumbnail-5.png", year: "2026" },
+  { title: "Thumbnail 06", category: "Thumbnails", thumbnail: "/thumbnail/thumbnail-6.jpg", year: "2026" },
+  { title: "Thumbnail 07", category: "Thumbnails", thumbnail: "/thumbnail/thumbnail-7.png", year: "2026" },
+
+
 ];
 
-const abroadPostProjects: Project[] = Array.from({ length: 4 }, (_, i) => {
+const abroadPostProjects: Project[] = Array.from({ length: 11 }, (_, i) => {
   const num = String(i + 1).padStart(2, "0");
   return {
     title: `Abroad Post ${num}`,
@@ -110,14 +121,14 @@ const abroadPostProjects: Project[] = Array.from({ length: 4 }, (_, i) => {
   };
 });
 
-const socialMediaProjects: Project[] = Array.from({ length: 4 }, (_, i) => ({
+const socialMediaProjects: Project[] = Array.from({ length: 12 }, (_, i) => ({
   title: `Social Post ${String(i + 1).padStart(2, "0")}`,
   category: "Social Media" as const,
   thumbnail: `/socialmedia/post-${i + 1}.jpg`,
   year: "2026",
 }));
 
-const typographyProjects: Project[] = Array.from({ length: 4 }, (_, i) => ({
+const typographyProjects: Project[] = Array.from({ length: 5 }, (_, i) => ({
   title: `Typography ${String(i + 1).padStart(2, "0")}`,
   category: "Typography" as const,
   thumbnail: `/typography/typography-${i + 1}.jpg`,
