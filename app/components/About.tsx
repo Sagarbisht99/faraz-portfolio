@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const AboutSection = () => {
   const stats = [
-    { label: "Project Completed", value: "300+" },
+    { label: "Project Completed", value: "350+" },
     { label: "Years Of Experience", value: "02+" },
     { label: "Client Satisfaction", value: "97%" },
   ];
